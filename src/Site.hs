@@ -60,9 +60,9 @@ initializer = do
 
 type WPLens b s m = (MonadIO m, MonadState s m) => Lens' Ctxt (Wordpress b)
 
-rqURI :: (MonadIO m, MonadReader Ctxt m) => m T.Text
+rqURI :: (MonadIO m, MonadState Ctxt m) => m T.Text
 rqURI = do
-  (T.decodeUtf8 . rawPathInfo ) <$> (fst <$> view requestLens)
+  (T.decodeUtf8 . rawPathInfo ) <$> (fst <$> use requestLens)
 
 app :: IO Application
 app = do

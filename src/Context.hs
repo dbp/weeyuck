@@ -25,11 +25,6 @@ data Ctxt = Ctxt { _req       :: FnRequest
                  , _heist     :: FnHeistState Ctxt
                  }
 
--- I had to add this for initWordpress to work but I don't know why
-instance MonadState Ctxt IO where
-  get = state (\s -> (s,s))
-  put s = state (\_ -> ((), s))
-
 makeLenses ''Ctxt
 
 instance RequestContext Ctxt where
